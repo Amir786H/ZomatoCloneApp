@@ -34,6 +34,7 @@ const LoginScreen:FC = () => {
 
               <BreakerText text='Log in or signup'/>
 
+              {/* Phone inpur component has to be added here. */}
               
              </Animated.ScrollView>
     </View>
