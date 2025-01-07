@@ -6,23 +6,51 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
+  Animated,
 } from 'react-native';
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import {useStyles} from 'react-native-unistyles';
 import {loginStyles} from '@unistyles/authStyles';
-import Animated from 'react-native-reanimated';
 import CustomText from '@components/global/CustomText';
 import BreakerText from '@components/ui/BreakerText';
 import PhoneInput from '@components/ui/PhoneInput';
+import SocialLogin from '@components/ui/SocialLogin';
+import { resetAndNavigate } from '@utils/NavigationUtils';
+import useKeyboardOffsetHeight from '@utils/useKeyboardOffsetHeight';
 
 const LoginScreen: FC = () => {
+
+  const animatedValue = useRef(new Animated.Value(0)).current;
+  const keyboardOffsetHeight = useKeyboardOffsetHeight();
+
   const [phone, setPhone] = useState('');
   const [loading, setLoading] = useState(false);
 
   const {styles} = useStyles(loginStyles);
 
-  const handleLogin = async() => {
+  useEffect(() => {
+    if(keyboardOffsetHeight==0){
+      Animated.timing(animatedValue, {
+        toValue: 0,
+        duration: 500,
+        useNativeDriver: false
+      }).start();
+    } else {
+      Animated.timing(animatedValue, {
+        toValue: -keyboardOffsetHeight * 0.25,
+        duration: 500,
+        useNativeDriver: false
+      }).start();
+    }
+  },[keyboardOffsetHeight])
 
+  const handleLogin = async() => {
+    setLoading(true);
+    // Add your login logic here
+    setTimeout(() => {
+      setLoading(false);
+      resetAndNavigate('UserBottomTab');
+    }, 2000);
   }
 
   return (
@@ -35,6 +63,7 @@ const LoginScreen: FC = () => {
 
       <Animated.ScrollView
         bounces={false}
+        style={{transform: [{translateY: animatedValue}]}}
         keyboardShouldPersistTaps="handled"
         keyboardDismissMode="on-drag"
         contentContainerStyle={styles.bottomContainer}>
@@ -65,8 +94,19 @@ const LoginScreen: FC = () => {
         <BreakerText text="or" />
 
         {/* Social Login component has to be added here*/}
+        <SocialLogin />
 
       </Animated.ScrollView>
+
+      <View style={styles.footer}>
+          <CustomText style={{marginBottom: 10}}>By continuing, you agree to our</CustomText>
+          <View style={styles.footerTextContainer}>
+            <CustomText style={styles.footerText}>Terms of Service</CustomText>
+            <CustomText style={styles.footerText}>Privacy Policy</CustomText>
+            <CustomText style={styles.footerText}>Content Policies</CustomText>
+          </View>
+      </View>
+
     </View>
   );
 };

@@ -94,7 +94,8 @@ export const loginStyles = createStyleSheet(({ colors, device, border }) => ({
         flexDirection: 'row',
         gap: 10,
         alignItems: 'center',
-        marginTop:5
+        marginTop:2,
+        marginBottom: 25
     },
     footerText: {
         textDecorationLine: 'underline',

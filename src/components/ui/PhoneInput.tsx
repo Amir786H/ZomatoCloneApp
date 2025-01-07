@@ -16,8 +16,8 @@ interface PhoneInputProps {
 const PhoneInput: FC<PhoneInputProps> = ({
   value,
   onChangeText,
-  onBlur,
   onFocus,
+  onBlur,
 }) => {
   const {styles} = useStyles(phoneStyles);
 
