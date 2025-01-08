@@ -1,12 +1,19 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import {View, Text, Image} from 'react-native';
+import React from 'react';
+import {useStyles} from 'react-native-unistyles';
+import {emptyStyles} from '@unistyles/emptyStyles';
 
 const ReorderScreen = () => {
-  return (
-    <View>
-      <Text>ReorderScreen</Text>
-    </View>
-  )
-}
+  const {styles} = useStyles(emptyStyles);
 
-export default ReorderScreen
+  return (
+   <View style={styles.container(false)}>
+      <Image
+        source={require('@assets/images/coming_soon3.png')}
+        style={styles.emptyImage}
+      />
+    </View>
+  );
+};
+
+export default ReorderScreen;

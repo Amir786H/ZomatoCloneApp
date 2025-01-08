@@ -93,7 +93,7 @@ const LoginScreen: FC = () => {
 
         <BreakerText text="or" />
 
-        {/* Social Login component has to be added here*/}
+        {/* Social Login component has been added here*/}
         <SocialLogin />
 
       </Animated.ScrollView>
