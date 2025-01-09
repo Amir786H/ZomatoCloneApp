@@ -48,6 +48,8 @@ const textStyleActive: TextStyle = {
     fontSize: RFValue(9.5),
 }
 
+/* The `TabIcon` component is a functional component that displays an icon and text based on the `name`
+prop it receives. */
 const TabIcon: FC<TabProps> = memo(({name}) => {
     return (
         <View style={tabStyles}>

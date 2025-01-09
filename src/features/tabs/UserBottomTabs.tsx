@@ -3,6 +3,7 @@ import DiningScreen from '@features/dining/DiningScreen';
 import LiveScreen from '@features/live/LiveScreen';
 import ReorderScreen from '@features/reorder/ReorderScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+import CustomTabBar from './CustomTabBar';
 
 
 const Tab = createBottomTabNavigator();
@@ -10,6 +11,7 @@ const Tab = createBottomTabNavigator();
 const UserBottomTab:React.FC = () => {
     return (
         <Tab.Navigator
+        tabBar={(props) => <CustomTabBar {...props} />}
         screenOptions={{
             headerShown: false,
             tabBarHideOnKeyboard: true,
