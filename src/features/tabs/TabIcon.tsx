@@ -1,4 +1,4 @@
-import DeliveryFocused from '@assets/tabicons/delivery-focused.png';
+import DeliveryFocused from '@assets/tabicons/delivery_focused.png';
 import Delivery from '@assets/tabicons/delivery.png';
 import ReorderFocused from '@assets/tabicons/reorder_focused.png';
 import Reorder from '@assets/tabicons/reorder.png';
@@ -13,6 +13,7 @@ import { Colors } from "@unistyles/Constants";
 import { FC, memo } from "react";
 import { Image, TextStyle, View, ViewStyle } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
+import { useAppSelector } from '@states/reduxHook';
 
 
 
@@ -71,6 +72,8 @@ const TabIcon: FC<TabProps> = memo(({name}) => {
 
 
 const TabIconFocused: FC<TabProps> = memo(({name}) => { 
+
+    const isVegMode = useAppSelector(state => state.user.isVegMode)
     return (
         <View style={tabStyles}>
             <Image
@@ -80,7 +83,7 @@ const TabIconFocused: FC<TabProps> = memo(({name}) => {
                     DiningFocused : name === 'Reorder' ?
                     ReorderFocused : LiveFocused
                 }
-             style={[styles]}
+             style={[styles, {tintColor: (name==='Live') ? undefined : isVegMode ? Colors.active : Colors.primary}]}
             />
          <CustomText style={textStyleActive}>{name}</CustomText>   
     </View>
